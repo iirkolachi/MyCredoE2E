@@ -3,6 +3,8 @@ import MyCredoE2E.Steps.CardPageSteps;
 import MyCredoE2E.Steps.ProductPageSteps;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
+
 public class E2ETest {
 
     @Test (priority = 1)
@@ -24,9 +26,10 @@ public class E2ETest {
                 .openCards();
     }
     @Test (priority = 3)
-    public void cardPage() {
+    public void cardPage() throws SQLException {
         CardPageSteps cardPageSteps = new CardPageSteps();
         cardPageSteps
+                .checkCardName()
                 .compareBalances();
     }
 }

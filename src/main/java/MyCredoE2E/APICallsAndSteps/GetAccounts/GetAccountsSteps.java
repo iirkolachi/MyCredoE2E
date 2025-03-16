@@ -4,9 +4,6 @@ import MyCredoE2E.Elements.ProductPageElements;
 import MyCredoE2E.Models.Accounts.AccountsRequestModel;
 import MyCredoE2E.Models.Accounts.AccountsResponseModel;
 import MyCredoE2E.Models.Accounts.AccountResult;
-import MyCredoE2E.Models.CurrencyRates.CurrencyRateRequestModel;
-import MyCredoE2E.Models.CurrencyRates.CurrencyRateResponseModel;
-import MyCredoE2E.Models.CurrencyRates.CurrencyResult;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import java.util.ArrayList;
@@ -43,35 +40,4 @@ public class GetAccountsSteps {
         return accountsResponseModel;
 
     }
-
-    @Step
-    public List<Double> getCurrencies(CurrencyRateRequestModel currencyRateRequestModel, String accessToken) {
-        CurrencyRateResponseModel currencyRateResponseModel = getAllCurrencyRates(currencyRateRequestModel, accessToken);
-        List<Double> rates = new ArrayList<>();
-        for (CurrencyResult currencyResult : currencyRateResponseModel.currencyResult) {
-            if (currencyResult.currency.equals("GEL") || currencyResult.currency.equals("USD") || currencyResult.currency.equals("EUR")) {
-                rates.add(currencyResult.buyRate);
-            }
-        }
-        return rates;
-    }
-
-    @Step
-    public CurrencyRateResponseModel getAllCurrencyRates(CurrencyRateRequestModel currencyRateRequestModel, String accessToken) {
-        GetAccountsCalls getAccountsCalls = new GetAccountsCalls();
-        Response response = getAccountsCalls.responseCurrency(currencyRateRequestModel, accessToken);
-        int statusCode = response.getStatusCode();
-        CurrencyRateResponseModel currencyRateResponseModel = null;
-        if (statusCode == 200) {
-            currencyRateResponseModel = response.as(CurrencyRateResponseModel.class);
-        } else {
-            currencyRateResponseModel = new CurrencyRateResponseModel();
-            currencyRateResponseModel.setError(String.format("Error occurred: Status code %d, Response: %s", statusCode, response.getBody()));
-        }
-        return currencyRateResponseModel;
-
-    }
-
 }
-
-

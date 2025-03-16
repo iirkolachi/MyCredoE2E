@@ -13,7 +13,6 @@ public class ProductPageSteps extends ProductPageElements {
     public ProductPageSteps openCards() {
         accountsAndCards.shouldBe(visible, Duration.ofSeconds(10)).click();
         card.shouldBe(visible, Duration.ofSeconds(10)).click();
-        System.out.println(balanceSum.getText());
         return this;
     }
 }
