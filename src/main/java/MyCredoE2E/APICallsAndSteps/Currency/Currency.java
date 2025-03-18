@@ -19,7 +19,7 @@ public class Currency {
             accessToken = dataController.accessToken();
             currencyRateRequestModel.setCurrency("GEL");
             currencyRateRequestModel.setChanelId(98);
-            currencyRateRequestModel.setChannelTypeId(1);
+            currencyRateRequestModel.setChannelTypeId(8);
             currencies = currencySteps.getCurrencies(currencyRateRequestModel, accessToken);
         } catch (SQLException e) {
             throw new RuntimeException(e);

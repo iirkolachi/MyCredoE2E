@@ -1,35 +1,51 @@
-import MyCredoE2E.Steps.AuthorizationSteps;
-import MyCredoE2E.Steps.CardPageSteps;
-import MyCredoE2E.Steps.ProductPageSteps;
+import MyCredoE2E.Steps.*;
 import org.testng.annotations.Test;
-
 import java.sql.SQLException;
 
 public class E2ETest {
+    AuthorizationSteps authorizationSteps = new AuthorizationSteps();
+    ProductPageSteps productPageSteps = new ProductPageSteps();
+    CardPageSteps cardPageSteps = new CardPageSteps();
+    CardLockUnlockSteps cardLockUnlockSteps = new CardLockUnlockSteps();
+    PinResetSteps pinResetSteps = new PinResetSteps();
 
-    @Test (priority = 1)
-    public void authorization() {
-        AuthorizationSteps authorizationSteps = new AuthorizationSteps();
-
+    @Test
+    public void e2eTest() throws SQLException {
         authorizationSteps
                 .openWebsite()
                 .enterUserData()
                 .closePopup()
                 .checkLogin();
-    }
-    @Test (priority = 2)
-    public void productsPage() {
-        ProductPageSteps productPageSteps = new ProductPageSteps();
 
         productPageSteps
                 .goToProductsPage()
                 .openCards();
-    }
-    @Test (priority = 3)
-    public void cardPage() throws SQLException {
-        CardPageSteps cardPageSteps = new CardPageSteps();
+
         cardPageSteps
                 .checkCardName()
-                .compareBalances();
+                .compareIndividualBalances()
+                .compareSumBalances();
+
+        cardLockUnlockSteps
+                .lockDecline()
+                .lockClose()
+                .lockCard()
+                .checkLock()
+                .closeLockNotification()
+                .unlockDecline()
+                .unlockClose()
+                .unlockCard()
+                .checkUnlock()
+                .closeUnlockNotification();
+
+        pinResetSteps
+                .resetDecline()
+                .resetClose()
+                .otpClose()
+                .otpTimeExpire()
+                .checkWrongOtp()
+                .closeWrongOtpNotification()
+                .resetPin()
+                .checkPinReset();
     }
 }

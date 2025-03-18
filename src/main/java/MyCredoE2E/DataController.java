@@ -2,10 +2,7 @@ package MyCredoE2E;
 
 import MyCredoE2E.Elements.ProductPageElements;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DataController {
     public static String query_getPersonalN = """
@@ -23,7 +20,7 @@ public class DataController {
             SELECT
             	*
             FROM dbo.TBL_Person (NOLOCK)
-            WHERE PersonalN = '18425315444'
+            WHERE PersonalN = ?
             """;
 
     public static String query_getToken = """
@@ -35,26 +32,25 @@ public class DataController {
             """;
 
     //get personal number
-//    public int personalN() throws SQLException {
-//        Connection databaseAccessSQL = DBAccessSQL.getConnection244();
-//        System.out.println(databaseAccessSQL.getSchema());
-//        ResultSet result = null;
-//        PreparedStatement preparedStatement = databaseAccessSQL.prepareStatement(query_getPersonalN);
-//        int personalN = 0;
-//        result = preparedStatement.executeQuery();
-//        while (result.next()) {
-//            personalN = Integer.parseInt(result.getString("PersonalNumber"));
-//        }
-//        return personalN;
-//    }
+    public String personalN() throws SQLException {
+        Connection databaseAccessSQL = DBAccessSQL.getConnection244();
+        ResultSet result = null;
+        PreparedStatement preparedStatement = databaseAccessSQL.prepareStatement(query_getPersonalN);
+        String personalN = "";
+        result = preparedStatement.executeQuery();
+        while (result.next()) {
+            personalN = result.getString("PersonalNumber");
+        }
+        return personalN;
+    }
 
     //get person id
     public int personId() throws SQLException {
     Connection databaseAccessSQL = DBAccessSQL.getConnection247();
     ResultSet result = null;
-    //int personalN = personalN();
+    String personalN = personalN();
     PreparedStatement preparedStatement = databaseAccessSQL.prepareStatement(query_getPersonId);
-    //preparedStatement.setInt(1, personalN);
+    preparedStatement.setString(1, personalN);
     int personId = 0;
     result = preparedStatement.executeQuery();
     while (result.next()) {
@@ -62,6 +58,7 @@ public class DataController {
     }
     return personId;
 }
+
     //generate token
     public String accessToken() throws SQLException {
         Connection databaseAccessSQL = DBAccessSQL.getConnection247();
@@ -75,7 +72,6 @@ public class DataController {
         return accessToken;
 
     }
-
     //get card name
     public String cardName() throws SQLException {
         ProductPageElements productPageElements = new ProductPageElements();
@@ -94,4 +90,5 @@ public class DataController {
         }
         return cardName;
     }
+
 }
