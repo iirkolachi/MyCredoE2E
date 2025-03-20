@@ -9,6 +9,7 @@ public class AuthorizationElements {
     public SelenideElement username = $(Selectors.byId("userName"));
     public SelenideElement password = $(Selectors.byId("newPass"));
     public SelenideElement enter = $(Selectors.byId("submitAuth"));
+    public SelenideElement otpPopup = $(Selectors.byXpath("//div[@class='popup-wrapper']"));
     public SelenideElement otp = $(Selectors.byId("otpCodeInput"));
     public SelenideElement otpSubmit = $(Selectors.byXpath("//*[@id='otpSend']/form/button"));
     public SelenideElement easyAuth = $(Selectors.byXpath("//div[@class='popup-wrapper']"));

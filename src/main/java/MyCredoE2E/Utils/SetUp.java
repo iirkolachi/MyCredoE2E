@@ -11,6 +11,7 @@ public class SetUp {
     public void setUpMethod() {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
+        Configuration.downloadsFolder = "C:\\Users\\tinatingvelesiani\\IdeaProjects\\MyCredo_E2E\\build\\downloads";
     }
 
     @AfterClass

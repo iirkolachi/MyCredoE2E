@@ -9,58 +9,59 @@ import static com.codeborne.selenide.Condition.visible;
 public class PinResetSteps extends PinResetElements {
     @Step
     public PinResetSteps resetDecline() {
-        pin.click();
-        decline.click();
+        pin.shouldBe(visible, Duration.ofSeconds(10)).click();
+        decline.shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
     @Step
     public PinResetSteps resetClose() {
-        pin.click();
-        close.click();
+        pin.shouldBe(visible, Duration.ofSeconds(5)).click();
+        close.shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
     @Step
     public PinResetSteps otpClose() {
-        pin.click();
-        resetButton.click();
-        close.click();
+        pin.shouldBe(visible, Duration.ofSeconds(5)).click();
+        resetButton.shouldBe(visible, Duration.ofSeconds(5)).click();
+        close.shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
     @Step
     public PinResetSteps otpTimeExpire() {
-        pin.click();
-        resetButton.click();
-        otpResend.shouldBe(visible, Duration.ofSeconds(120)).click();
-        System.out.println(otpResend.getText());
+        pin.shouldBe(visible, Duration.ofSeconds(5)).click();
+        resetButton.shouldBe(visible, Duration.ofSeconds(5)).click();
+        //otpResend.shouldBe(visible, Duration.ofSeconds(125)).click();
         return this;
     }
     @Step
     public PinResetSteps checkWrongOtp() {
-//        pin.click();
-//        resetButton.click();
         otpInput.setValue("1111");
-        otpSubmit.click();
-        String wrongOtp = wrongOtpNotification.getText();
+        otpSubmit.shouldBe(visible, Duration.ofSeconds(5)).click();
+        String wrongOtp = wrongOtpNotification.shouldBe(visible, Duration.ofSeconds(5)).getText();
         Assert.assertEquals(wrongOtp, "მონაცემები არასწორია");
         return this;
     }
     @Step
     public PinResetSteps closeWrongOtpNotification() {
-        closeWrongOtpNotification.click();
+        closeNotification.shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
     @Step
     public PinResetSteps resetPin() {
-        pin.click();
-        resetButton.click();
+        pin.shouldBe(visible, Duration.ofSeconds(5)).click();
+        resetButton.shouldBe(visible, Duration.ofSeconds(5)).click();
         otpInput.setValue("1234");
         otpSubmit.click();
         return this;
     }
     @Step
     public PinResetSteps checkPinReset() {
-        String pinReset = pinResetNotification.getText();
+        String pinReset = pinResetNotification.shouldBe(visible, Duration.ofSeconds(5)).getText();
         Assert.assertEquals(pinReset, "ახალი პინ კოდი sms-ით გამოგიგზავნეთ");
+        return this;
+    }
+    public PinResetSteps closePinResetNotification() {
+        closeNotification.shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
 }

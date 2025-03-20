@@ -9,14 +9,17 @@ import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.util.List;
+
+import static com.codeborne.selenide.Condition.visible;
 
 public class CardPageSteps extends CardPageElements {
     @Step
     public CardPageSteps checkCardName() throws SQLException {
         DataController dataController = new DataController();
         CardPageElements cardPageElements = new CardPageElements();
-        Assert.assertEquals(dataController.cardName(), cardPageElements.cardName.getText());
+        Assert.assertEquals(dataController.cardName(), cardPageElements.cardName.shouldBe(visible, Duration.ofSeconds(5)).getText());
         return this;
     }
     @Step

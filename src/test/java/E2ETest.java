@@ -8,6 +8,7 @@ public class E2ETest {
     CardPageSteps cardPageSteps = new CardPageSteps();
     CardLockUnlockSteps cardLockUnlockSteps = new CardLockUnlockSteps();
     PinResetSteps pinResetSteps = new PinResetSteps();
+    DownloadRequisitesSteps downloadRequisitesSteps = new DownloadRequisitesSteps();
 
     @Test
     public void e2eTest() throws SQLException {
@@ -46,6 +47,12 @@ public class E2ETest {
                 .checkWrongOtp()
                 .closeWrongOtpNotification()
                 .resetPin()
-                .checkPinReset();
+                .checkPinReset()
+                .closePinResetNotification();
+
+        downloadRequisitesSteps
+                .deleteExistingFile()
+                .downloadRequisites()
+                .checkDownload();
     }
 }

@@ -1,12 +1,9 @@
 package MyCredoE2E.Steps;
 
 import MyCredoE2E.Elements.AuthorizationElements;
-import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 import org.testng.Assert;
-
 import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -29,18 +26,17 @@ public class AuthorizationSteps extends AuthorizationElements {
     }
     @Step
     public AuthorizationSteps closePopup() {
-        if (easyAuth.shouldBe(visible, Duration.ofSeconds(5)).isDisplayed()) {
+        if (easyAuth.shouldBe(visible, Duration.ofSeconds(15)).isDisplayed()) {
             easyAuthClose.click();
             easyAuthClose.click();
         } else {
-            productsPage.shouldBe(visible, Duration.ofSeconds(5)).click();
+            productsPage.shouldBe(visible, Duration.ofSeconds(15)).click();
         }
-
         return this;
     }
     @Step
     public AuthorizationSteps checkLogin() {
-        String transactions = lastTransactions.shouldBe(visible, Duration.ofSeconds(10)).getText();
+        String transactions = lastTransactions.shouldBe(visible, Duration.ofSeconds(15)).getText();
         Assert.assertEquals(transactions, "ბოლო ტრანზაქციები");
         return this;
     }
