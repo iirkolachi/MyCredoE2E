@@ -9,11 +9,12 @@ public class E2ETest {
     CardLockUnlockSteps cardLockUnlockSteps = new CardLockUnlockSteps();
     PinResetSteps pinResetSteps = new PinResetSteps();
     DownloadRequisitesSteps downloadRequisitesSteps = new DownloadRequisitesSteps();
+    NextCardSteps nextCardSteps = new NextCardSteps();
 
     @Test
     public void e2eTest() throws SQLException {
         authorizationSteps
-                .openWebsite()
+                .openWebsite("https://testmycredo.credo.ge/landing/main/auth")
                 .enterUserData()
                 .closePopup()
                 .checkLogin();
@@ -54,5 +55,11 @@ public class E2ETest {
                 .deleteExistingFile()
                 .downloadRequisites()
                 .checkDownload();
+
+        nextCardSteps
+                .takeFirstAccNumber()
+                .clickNextButton()
+                .takeSecondAccNumber()
+                .checkCardChange();
     }
 }
