@@ -10,6 +10,7 @@ public class E2ETest {
     PinResetSteps pinResetSteps = new PinResetSteps();
     DownloadRequisitesSteps downloadRequisitesSteps = new DownloadRequisitesSteps();
     NextCardSteps nextCardSteps = new NextCardSteps();
+    TransferSteps transferSteps = new TransferSteps();
 
     @Test
     public void e2eTest() throws SQLException {
@@ -60,6 +61,16 @@ public class E2ETest {
                 .takeFirstAccNumber()
                 .clickNextButton()
                 .takeSecondAccNumber()
-                .checkCardChange();
+                .checkCardChange()
+                .backToFirstCard();
+
+        transferSteps
+                .clickTranfer()
+                .chooseOwnAcc()
+                .clickWhereAcc()
+                .chooseWhereAcc()
+                .chooseCurrency()
+                .amountInput()
+                .tranfer();
     }
 }

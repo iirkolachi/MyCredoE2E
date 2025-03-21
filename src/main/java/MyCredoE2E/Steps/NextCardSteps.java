@@ -28,4 +28,9 @@ public class NextCardSteps extends NextCardElements {
         Assert.assertNotSame(firstAccNumber, secondAccNumber);
         return this;
     }
+    @Step
+    public NextCardSteps backToFirstCard() {
+    previousButton.click();
+    return this;
+    }
 }
