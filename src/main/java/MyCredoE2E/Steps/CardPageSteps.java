@@ -11,45 +11,49 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.List;
-
 import static com.codeborne.selenide.Condition.visible;
 
 public class CardPageSteps extends CardPageElements {
+    ProductPageElements productPageElements = new ProductPageElements();
     @Step
     public CardPageSteps checkCardName() throws SQLException {
         DataController dataController = new DataController();
-        CardPageElements cardPageElements = new CardPageElements();
-        Assert.assertEquals(dataController.cardName(), cardPageElements.cardName.shouldBe(visible, Duration.ofSeconds(5)).getText());
+        Assert.assertEquals(dataController.cardName(), cardName.shouldBe(visible, Duration.ofSeconds(5)).getText());
         return this;
     }
     @Step
-    public CardPageSteps compareIndividualBalances() {
+    public void getBalances() {
+        var accountNumber = productPageElements.accNumber.getText();
         GetAccountsList getAccountsList = new GetAccountsList();
-        List<Double> balances = getAccountsList.getAccountsList();
-
+        List<Double> balanceForCheck = getAccountsList.getAccountsList(accountNumber);
+        Currency currency = new Currency();
+        List<Double> currenciesForCheck = currency.getCurrencyRatesList();
+        compareGelBalances(balanceForCheck);
+        compareUsdBalances(balanceForCheck);
+        compareEurBalances(balanceForCheck);
+        compareSumBalances(balanceForCheck, currenciesForCheck);
+    }
+    @Step
+    public void compareGelBalances(List<Double> balances) {
         String gelText = gel.getText();
         String[] gelSplitText = gelText.split("₾");
         Assert.assertEquals(balances.get(0), Double.parseDouble(gelSplitText[0]));
-
+    }
+    @Step
+    public void compareUsdBalances(List<Double> balances) {
         String usdText = usd.getText();
         String[] usdSplitText = usdText.split("\\$");
         Assert.assertEquals(balances.get(1), Double.parseDouble(usdSplitText[0]));
-
+    }
+    @Step
+    public void compareEurBalances(List<Double> balances) {
         String eurText = eur.getText();
         String[] eurSplitText = eurText.split("€");
         Assert.assertEquals(balances.get(2), Double.parseDouble(eurSplitText[0]));
-
-        return this;
     }
     @Step
-    public CardPageSteps compareSumBalances() {
-        GetAccountsList getAccountsList = new GetAccountsList();
-        Currency currency = new Currency();
-        List<Double> balances = getAccountsList.getAccountsList();
-        List<Double> rates = currency.getCurrencyRatesList();
-
-        ProductPageElements productPageElements = new ProductPageElements();
-        String sumFront = productPageElements.balanceSum.getText();
+    public CardPageSteps compareSumBalances(List<Double> balances, List<Double> rates) {
+        String sumFront = balanceSum.getText();
         sumFront = sumFront.replace(",", "");
         String[] sumSplit = sumFront.split("₾");
         double sumFrontValue = Double.parseDouble(sumSplit[0]);

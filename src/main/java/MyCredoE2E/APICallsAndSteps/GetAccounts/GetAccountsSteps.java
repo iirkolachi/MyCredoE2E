@@ -12,10 +12,8 @@ import java.util.List;
 public class GetAccountsSteps {
 
     @Step
-    public List<Double> getBalances(AccountsRequestModel accountsRequestModel, String accessToken) {
+    public List<Double> getBalances(AccountsRequestModel accountsRequestModel, String accessToken, String accountNumber) {
         AccountsResponseModel accountsResponseModel = getAccounts(accountsRequestModel, accessToken);
-        ProductPageElements productPageElements = new ProductPageElements();
-        var accountNumber = productPageElements.accNumber.getText();
         List<Double> balances = new ArrayList<>();
         for (AccountResult accountResult : accountsResponseModel.accountResult) {
             if (accountResult.accountNumber.equals(accountNumber)) {
@@ -24,7 +22,6 @@ public class GetAccountsSteps {
         }
         return balances;
     }
-
     @Step
     public AccountsResponseModel getAccounts(AccountsRequestModel accountsRequestModel, String accessToken) {
         GetAccountsCalls getAccountsCalls = new GetAccountsCalls();
@@ -38,6 +35,5 @@ public class GetAccountsSteps {
             accountsResponseModel.setError(String.format("Error occurred: Status code %d, Response: %s", statusCode, response.getBody()));
         }
         return accountsResponseModel;
-
     }
 }

@@ -22,12 +22,12 @@ public class E2ETest {
 
         productPageSteps
                 .goToProductsPage()
+                .openAccsAndCards()
                 .openCards();
 
         cardPageSteps
                 .checkCardName()
-                .compareIndividualBalances()
-                .compareSumBalances();
+                .getBalances();
 
         cardLockUnlockSteps
                 .lockDecline()
@@ -67,10 +67,27 @@ public class E2ETest {
         transferSteps
                 .clickTranfer()
                 .chooseOwnAcc()
+                .takeOwnAccNumber()
                 .clickWhereAcc()
                 .chooseWhereAcc()
                 .chooseCurrency()
+                .takeAnotherAccNumber()
+                .getBeforeAmounts()
                 .amountInput()
-                .tranfer();
+                .tranfer()
+                .tranferPopup()
+                .checkTransferNotification()
+                .closePopup()
+                .moveToMainPage()
+                .takeFirstTransfer()
+                .firstTransferOpens()
+                .checkTransferBetweenYourAccs()
+                .takeOwnAccNumberfromTransactions()
+                .takeAnotherAccNumberfromTransactions()
+                .checkOwnAccs()
+                .checkAnotherAccs()
+                .getAfterAmounts()
+                .checkFromBalances()
+                .checkToBalances();
     }
 }

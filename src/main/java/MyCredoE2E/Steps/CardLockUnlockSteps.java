@@ -27,7 +27,7 @@ public class CardLockUnlockSteps extends CardLockUnlockElements {
     }
     @Step
     public CardLockUnlockSteps checkLock() {
-        String lockSuccessfully = lockSuccessful.shouldBe(visible, Duration.ofSeconds(5)).getText();
+        String lockSuccessfully = lockSuccessful.shouldBe(visible, Duration.ofSeconds(10)).getText();
         Assert.assertEquals(lockSuccessfully, "ბარათი წარმატებით დაიბლოკა");
         return this;
     }
@@ -38,7 +38,7 @@ public class CardLockUnlockSteps extends CardLockUnlockElements {
     }
     @Step
     public CardLockUnlockSteps unlockDecline() {
-        unlock.shouldBe(visible, Duration.ofSeconds(5)).click();
+        unlock.shouldBe(visible, Duration.ofSeconds(10)).click();
         decline.shouldBe(visible, Duration.ofSeconds(5)).click();
         return this;
     }
@@ -56,7 +56,7 @@ public class CardLockUnlockSteps extends CardLockUnlockElements {
     }
     @Step
     public CardLockUnlockSteps checkUnlock() {
-        String lockSuccessfully = unlockSuccessful.shouldBe(visible, Duration.ofSeconds(5)).getText();
+        String lockSuccessfully = unlockSuccessful.shouldBe(visible, Duration.ofSeconds(10)).getText();
         Assert.assertEquals(lockSuccessfully, "ბარათი წარმატებით განიბლოკა");
         return this;
     }
