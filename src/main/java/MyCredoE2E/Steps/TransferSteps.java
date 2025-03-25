@@ -55,10 +55,10 @@ public class TransferSteps extends TransferElements {
         System.out.println("here");
         if (!whereAcc.isDisplayed()) {
             whereAccInput.shouldBe(clickable, Duration.ofSeconds(10)).click();
-            whereAcc.shouldBe(clickable, Duration.ofSeconds(5)).click();
+            whereAcc.shouldBe(clickable, Duration.ofSeconds(15)).click();
         } else {
             System.out.println("click");
-            whereAcc.shouldBe(clickable, Duration.ofSeconds(5)).click();
+            whereAcc.shouldBe(clickable, Duration.ofSeconds(15)).click();
         }
         return this;
     }

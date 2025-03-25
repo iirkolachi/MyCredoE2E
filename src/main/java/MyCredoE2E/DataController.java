@@ -31,7 +31,7 @@ public class DataController {
             EXEC CredoBnk.card.spcardlist @personid = ?
             """;
 
-    //get personal number
+    //get personal number (from 244)
     public String personalN() throws SQLException {
         Connection databaseAccessSQL = DBAccessSQL.getConnection244();
         ResultSet result = null;

@@ -16,9 +16,11 @@ public class E2ETest {
     public void e2eTest() throws SQLException {
         authorizationSteps
                 .openWebsite("https://testmycredo.credo.ge/landing/main/auth")
-                .enterUserData()
-                .closePopup()
-                .checkLogin();
+                .enterUsername("IILO2020")
+                .enterPassword("Xeleeee1")
+                .clickEnter()
+                .otpPopup()
+                .easyAuthPopup_checkAuth();
 
         productPageSteps
                 .goToProductsPage()
@@ -27,7 +29,7 @@ public class E2ETest {
 
         cardPageSteps
                 .checkCardName()
-                .getBalances();
+                .checkBalances();
 
         cardLockUnlockSteps
                 .lockDecline()

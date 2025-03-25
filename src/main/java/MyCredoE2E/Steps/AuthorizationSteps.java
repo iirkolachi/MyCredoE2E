@@ -5,8 +5,8 @@ import MyCredoE2E.Utils.SetUp;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.time.Duration;
-import static com.codeborne.selenide.Condition.clickable;
-import static com.codeborne.selenide.Condition.visible;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 
 public class AuthorizationSteps extends AuthorizationElements {
@@ -19,30 +19,42 @@ public class AuthorizationSteps extends AuthorizationElements {
         return this;
     }
     @Step
-    public AuthorizationSteps enterUserData() {
-        username.setValue("IILO2020");
-        password.setValue("Xeleeee1");
+    public AuthorizationSteps enterUsername (String usernameValue) {
+        username.shouldBe(clickable, Duration.ofSeconds(20)).click();
+        username.setValue(usernameValue);
+        return this;
+    }
+    @Step
+    public AuthorizationSteps enterPassword (String passwordValue) {
+        password.shouldBe(clickable, Duration.ofSeconds(20)).click();
+        password.setValue(passwordValue);
+        return this;
+    }
+    @Step
+    public AuthorizationSteps clickEnter () {
         enter.click();
-        otp.shouldBe(clickable, Duration.ofSeconds(10)).click();
+        return this;
+    }
+    @Step
+    public AuthorizationSteps otpPopup () {
+        otp.shouldBe(clickable, Duration.ofSeconds(20)).click();
         otp.setValue("1234");
         otpSubmit.click();
-
         return this;
     }
     @Step
-    public AuthorizationSteps closePopup() {
-        if (easyAuth.shouldBe(visible, Duration.ofSeconds(15)).isDisplayed()) {
-            easyAuthClose.click();
-            easyAuthClose.click();
-        } else {
-            productsPage.shouldBe(visible, Duration.ofSeconds(15)).click();
-        }
-        return this;
-    }
-    @Step
-    public AuthorizationSteps checkLogin() {
-        String transactions = lastTransactions.shouldBe(visible, Duration.ofSeconds(15)).getText();
-        Assert.assertEquals(transactions, "ბოლო ტრანზაქციები");
+    public AuthorizationSteps easyAuthPopup_checkAuth() {
+            if (easyAuth.is(exist, Duration.ofSeconds(5))) {
+                easyAuthClose.click();
+                easyAuthClose.click();
+                String transactions = lastTransactions.shouldBe(visible, Duration.ofSeconds(20)).getText();
+                Assert.assertEquals(transactions, "ბოლო ტრანზაქციები");
+            } else {
+                String transactions = lastTransactions.shouldBe(visible, Duration.ofSeconds(20)).getText();
+                Assert.assertEquals(transactions, "ბოლო ტრანზაქციები");
+                System.out.println("else");
+                productsPage.shouldBe(clickable, Duration.ofSeconds(20)).click();
+            }
         return this;
     }
 }

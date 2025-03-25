@@ -22,7 +22,7 @@ public class CardPageSteps extends CardPageElements {
         return this;
     }
     @Step
-    public void getBalances() {
+    public CardPageSteps checkBalances() {
         var accountNumber = productPageElements.accNumber.getText();
         GetAccountsList getAccountsList = new GetAccountsList();
         List<Double> balanceForCheck = getAccountsList.getAccountsList(accountNumber);
@@ -32,6 +32,7 @@ public class CardPageSteps extends CardPageElements {
         compareUsdBalances(balanceForCheck);
         compareEurBalances(balanceForCheck);
         compareSumBalances(balanceForCheck, currenciesForCheck);
+        return this;
     }
     @Step
     public void compareGelBalances(List<Double> balances) {
@@ -52,7 +53,7 @@ public class CardPageSteps extends CardPageElements {
         Assert.assertEquals(balances.get(2), Double.parseDouble(eurSplitText[0]));
     }
     @Step
-    public CardPageSteps compareSumBalances(List<Double> balances, List<Double> rates) {
+    public void compareSumBalances(List<Double> balances, List<Double> rates) {
         String sumFront = balanceSum.getText();
         sumFront = sumFront.replace(",", "");
         String[] sumSplit = sumFront.split("₾");
@@ -65,7 +66,5 @@ public class CardPageSteps extends CardPageElements {
         String formattedSumBack = df.format(sumBack);
         String formattedSumFront = df.format(sumFrontValue);
         Assert.assertEquals(formattedSumBack, formattedSumFront);
-
-        return this;
     }
 }
