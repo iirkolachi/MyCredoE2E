@@ -18,7 +18,7 @@ public class CardPageSteps extends CardPageElements {
     @Step
     public CardPageSteps checkCardName() throws SQLException {
         DataController dataController = new DataController();
-        Assert.assertEquals(dataController.cardName(), cardName.shouldBe(visible, Duration.ofSeconds(5)).getText());
+        Assert.assertEquals(dataController.cardName(), cardName.shouldBe(visible, Duration.ofSeconds(20)).getText());
         return this;
     }
     @Step

@@ -20,23 +20,27 @@ public class E2ETest {
                 .enterPassword("Xeleeee1")
                 .clickEnter()
                 .otpPopup()
-                .easyAuthPopup_checkAuth();
+                .easyAuthPopup()
+                .checkAuth();
 
         productPageSteps
                 .goToProductsPage()
                 .openAccsAndCards()
-                .openCards();
+                .openCards()
+                .openCard();
 
         cardPageSteps
                 .checkCardName()
                 .checkBalances();
 
         cardLockUnlockSteps
+                .clickLock()
                 .lockDecline()
                 .lockClose()
                 .lockCard()
                 .checkLock()
                 .closeLockNotification()
+                .clickUnlock()
                 .unlockDecline()
                 .unlockClose()
                 .unlockCard()
@@ -44,10 +48,11 @@ public class E2ETest {
                 .closeUnlockNotification();
 
         pinResetSteps
+                .clickPin()
                 .resetDecline()
                 .resetClose()
                 .otpClose()
-                .otpTimeExpire()
+                .wrongOtp()
                 .checkWrongOtp()
                 .closeWrongOtpNotification()
                 .resetPin()
@@ -71,6 +76,7 @@ public class E2ETest {
                 .chooseOwnAcc()
                 .takeOwnAccNumber()
                 .clickWhereAcc()
+                .clickWhereAccAgain()
                 .chooseWhereAcc()
                 .chooseCurrency()
                 .takeAnotherAccNumber()

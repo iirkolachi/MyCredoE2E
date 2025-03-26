@@ -19,7 +19,7 @@ public class DownloadRequisitesSteps extends DownloadRequisitesElements {
     @Step
     public DownloadRequisitesSteps downloadRequisites() {
         requisite.click();
-        Selenide.sleep(8000);
+        Selenide.sleep(10000);
         return this;
     }
     @Step

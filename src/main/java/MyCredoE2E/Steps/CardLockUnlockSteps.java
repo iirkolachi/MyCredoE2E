@@ -8,20 +8,24 @@ import static com.codeborne.selenide.Condition.visible;
 
 public class CardLockUnlockSteps extends CardLockUnlockElements {
     @Step
-    public CardLockUnlockSteps lockDecline() {
+    public CardLockUnlockSteps clickLock() {
         lock.shouldBe(visible, Duration.ofSeconds(20)).click();
+        return this;
+    }
+    @Step
+    public CardLockUnlockSteps lockDecline() {
         decline.shouldBe(visible, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
     public CardLockUnlockSteps lockClose() {
-        lock.shouldBe(visible, Duration.ofSeconds(20)).click();
+        clickLock();
         close.shouldBe(visible, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
     public CardLockUnlockSteps lockCard() {
-        lock.shouldBe(visible, Duration.ofSeconds(20)).click();
+        clickLock();
         lockButton.shouldBe(visible, Duration.ofSeconds(20)).click();
         return this;
     }
@@ -37,20 +41,24 @@ public class CardLockUnlockSteps extends CardLockUnlockElements {
         return this;
     }
     @Step
-    public CardLockUnlockSteps unlockDecline() {
+    public CardLockUnlockSteps clickUnlock() {
         unlock.shouldBe(visible, Duration.ofSeconds(20)).click();
+        return this;
+    }
+    @Step
+    public CardLockUnlockSteps unlockDecline() {
         decline.shouldBe(visible, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
     public CardLockUnlockSteps unlockClose(){
-        unlock.shouldBe(visible, Duration.ofSeconds(20)).click();
+        clickUnlock();
         close.shouldBe(visible, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
     public CardLockUnlockSteps unlockCard() {
-        unlock.shouldBe(visible, Duration.ofSeconds(20)).click();
+        clickUnlock();
         unlockButton.shouldBe(visible, Duration.ofSeconds(20)).click();
         return this;
     }

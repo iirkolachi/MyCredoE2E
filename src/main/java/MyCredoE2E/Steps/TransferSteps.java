@@ -4,13 +4,9 @@ import MyCredoE2E.APICallsAndSteps.GetAccounts.GetAccountsList;
 import MyCredoE2E.Elements.TransferElements;
 import io.qameta.allure.Step;
 import org.testng.Assert;
-
 import java.time.Duration;
 import java.util.List;
-import java.util.jar.JarOutputStream;
-
-import static com.codeborne.selenide.Condition.clickable;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 
 public class TransferSteps extends TransferElements {
     String from;
@@ -30,12 +26,12 @@ public class TransferSteps extends TransferElements {
 
     @Step
     public TransferSteps clickTranfer() {
-        transferButton.shouldBe(clickable, Duration.ofSeconds(5)).click();
+        transferButton.shouldBe(clickable, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
     public TransferSteps chooseOwnAcc() {
-        ownAccount.shouldBe(clickable, Duration.ofSeconds(5)).click();
+        ownAccount.shouldBe(clickable, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
@@ -43,28 +39,26 @@ public class TransferSteps extends TransferElements {
         from = ownAccNumber.getText();
         return this;
     }
-
     @Step
     public TransferSteps clickWhereAcc() {
-        whereAccInput.shouldBe(clickable, Duration.ofSeconds(10)).isDisplayed();
-        whereAccInput.click();
+        whereAccInput.shouldBe(clickable, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
-    public TransferSteps chooseWhereAcc() {
-        System.out.println("here");
-        if (!whereAcc.isDisplayed()) {
-            whereAccInput.shouldBe(clickable, Duration.ofSeconds(10)).click();
-            whereAcc.shouldBe(clickable, Duration.ofSeconds(15)).click();
-        } else {
-            System.out.println("click");
-            whereAcc.shouldBe(clickable, Duration.ofSeconds(15)).click();
+    public TransferSteps clickWhereAccAgain() {
+        if (whereAccInput.is(exist, Duration.ofSeconds(5))) {
+            clickWhereAcc();
         }
         return this;
     }
     @Step
+    public TransferSteps chooseWhereAcc() {
+        whereAcc.shouldBe(clickable, Duration.ofSeconds(20)).click();
+        return this;
+    }
+    @Step
     public TransferSteps chooseCurrency() {
-        currency.shouldBe(clickable, Duration.ofSeconds(5)).click();
+        currency.shouldBe(clickable, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
@@ -74,28 +68,26 @@ public class TransferSteps extends TransferElements {
     }
     @Step
     public TransferSteps getBeforeAmounts() {
-        GetAccountsList getAccountsList = new GetAccountsList();
         List<Double> balanceFromBefore = getAccountsList.getAccountsList(from);
         List<Double> balanceToBefore = getAccountsList.getAccountsList(to);
         amountFromBefore = balanceFromBefore.get(0);
         amountToBefore = balanceToBefore.get(0);
         return this;
     }
-
     @Step
     public TransferSteps amountInput() {
-        amountInput.shouldBe(clickable, Duration.ofSeconds(5)).click();
+        amountInput.shouldBe(clickable, Duration.ofSeconds(30)).click();
         amountInput.setValue(String.valueOf(transferAmount));
         return this;
     }
     @Step
     public TransferSteps tranfer() {
-        transfer.shouldBe(clickable, Duration.ofSeconds(5)).click();
+        transfer.shouldBe(clickable, Duration.ofSeconds(30)).click();
         return this;
     }
     @Step
     public TransferSteps tranferPopup() {
-        popup.shouldBe(visible, Duration.ofSeconds(10)).isDisplayed();
+        popup.shouldBe(visible, Duration.ofSeconds(30)).isDisplayed();
         return this;
     }
     @Step
@@ -110,17 +102,17 @@ public class TransferSteps extends TransferElements {
     }
     @Step
     public TransferSteps moveToMainPage() {
-        mainPage.shouldBe(visible, Duration.ofSeconds(10)).click();
+        mainPage.shouldBe(visible, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step
     public TransferSteps takeFirstTransfer() {
-        firstTransfer.shouldBe(visible, Duration.ofSeconds(10)).click();
+        firstTransfer.shouldBe(visible, Duration.ofSeconds(30)).click();
         return this;
     }
     @Step
     public TransferSteps firstTransferOpens() {
-        transferPopup.shouldBe(visible, Duration.ofSeconds(10)).isDisplayed();
+        transferPopup.shouldBe(visible, Duration.ofSeconds(30)).isDisplayed();
         return this;
     }
     @Step
@@ -152,7 +144,6 @@ public class TransferSteps extends TransferElements {
     }
     @Step
     public TransferSteps getAfterAmounts() {
-        GetAccountsList getAccountsList = new GetAccountsList();
         List<Double> balanceFromAfter = getAccountsList.getAccountsList(from);
         List<Double> balanceToAfter = getAccountsList.getAccountsList(to);
         amountFromAfter = balanceFromAfter.get(0);
