@@ -11,7 +11,6 @@ public class PinResetElements {
     public SelenideElement resetButton = $(Selectors.byId("resetPin"));
     public SelenideElement otpInput = $(Selectors.byId("otpCodeInput"));
     public SelenideElement otpSubmit = $(Selectors.byXpath("//button[@class='primary' and contains(text(), 'დადასტურება')]"));
-    public SelenideElement otpResend = $(Selectors.byXpath("//p[@class='paragraph-14 blue pointer' and text()='კოდის თავიდან მიღება']"));
     public SelenideElement wrongOtpNotification = $(Selectors.byXpath("//p[text()='მონაცემები არასწორია']"));
     public SelenideElement closeNotification = $(Selectors.byXpath("//div[@class='icon white-010 close pointer']"));
     public SelenideElement pinResetNotification = $(Selectors.byXpath("//p[text()='ახალი პინ კოდი sms-ით გამოგიგზავნეთ']"));

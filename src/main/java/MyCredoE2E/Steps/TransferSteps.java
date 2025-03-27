@@ -42,11 +42,13 @@ public class TransferSteps extends TransferElements {
     @Step
     public TransferSteps clickWhereAcc() {
         whereAccInput.shouldBe(clickable, Duration.ofSeconds(20)).click();
+        System.out.println("გაიხსნა");
         return this;
     }
     @Step
     public TransferSteps clickWhereAccAgain() {
-        if (whereAccInput.is(exist, Duration.ofSeconds(5))) {
+        if (!whereAcc.is(exist, Duration.ofSeconds(5))) {
+            System.out.println("აქ მოვიდა");
             clickWhereAcc();
         }
         return this;
@@ -54,6 +56,7 @@ public class TransferSteps extends TransferElements {
     @Step
     public TransferSteps chooseWhereAcc() {
         whereAcc.shouldBe(clickable, Duration.ofSeconds(20)).click();
+        System.out.println("აირჩია");
         return this;
     }
     @Step

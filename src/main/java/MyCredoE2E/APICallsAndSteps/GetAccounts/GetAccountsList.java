@@ -1,7 +1,6 @@
 package MyCredoE2E.APICallsAndSteps.GetAccounts;
 
 import MyCredoE2E.DataController;
-import MyCredoE2E.Elements.ProductPageElements;
 import MyCredoE2E.Models.Accounts.AccountsRequestModel;
 import java.sql.SQLException;
 import java.util.List;
