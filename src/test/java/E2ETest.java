@@ -11,6 +11,7 @@ public class E2ETest {
     DownloadRequisitesSteps downloadRequisitesSteps = new DownloadRequisitesSteps();
     NextCardSteps nextCardSteps = new NextCardSteps();
     TransferSteps transferSteps = new TransferSteps();
+    LogoutSteps logoutSteps = new LogoutSteps();
 
     @Test
     public void e2eTest() throws SQLException {
@@ -96,6 +97,12 @@ public class E2ETest {
                 .checkAnotherAccs()
                 .getAfterAmounts()
                 .checkFromBalances()
-                .checkToBalances();
+                .checkToBalances()
+                .closeTranferPopup();
+
+        logoutSteps
+                .clickUserMenu()
+                .clickLogout()
+                .checkLogout();
     }
 }

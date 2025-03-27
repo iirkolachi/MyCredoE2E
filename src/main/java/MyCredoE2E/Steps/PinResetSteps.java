@@ -4,6 +4,8 @@ import MyCredoE2E.Elements.PinResetElements;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.clickable;
 import static com.codeborne.selenide.Condition.visible;
 
 public class PinResetSteps extends PinResetElements {
@@ -35,7 +37,7 @@ public class PinResetSteps extends PinResetElements {
         clickPin();
         resetButton.shouldBe(visible, Duration.ofSeconds(20)).click();
         otpInput.setValue("1111");
-        otpSubmit.shouldBe(visible, Duration.ofSeconds(20)).click();
+        otpSubmit.shouldBe(clickable, Duration.ofSeconds(20)).click();
         return this;
     }
     @Step

@@ -24,4 +24,5 @@ public class TransferElements {
     public SelenideElement headerText = $(Selectors.byXpath("//p[@class='block-header-caps-18' and normalize-space(text())='საკუთარ ანგარიშებს შორის გადარიცხვა']"));
     public SelenideElement ownAccNumberTransactions = $(Selectors.byXpath("//p[@class='block-header-caps-16' and normalize-space(text())='GE72CD0360000036501626GEL']"));
     public SelenideElement whereAccNumberTransactions = $(Selectors.byXpath("//p[@class='block-header-caps-16' and normalize-space(text())='GE07CD0360000036659742GEL']"));
+    public SelenideElement closePopup = $(Selectors.byXpath("//div[@class='popup-wrapper']//div[@class='header']//div[@class='icon close-black grey-010 pointer']"));
 }
